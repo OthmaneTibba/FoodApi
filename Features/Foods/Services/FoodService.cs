@@ -34,11 +34,16 @@ namespace FoodApi.Features.Foods.Services
 
             using var foodClient = clientFactory.CreateClient("foodClient");
             var response = await foodClient
-            .GetFromJsonAsync<Dictionary<string, dynamic>>($"foods/search/v3?search_expression={foodName}&format=json&include_sub_categories=false&flag_default_serving=true&max_results=1&language=en&region=US")
+            .GetFromJsonAsync<Dictionary<string, dynamic>>($"foods/search/v3?search_expression={foodName}&format=json&include_sub_categories=false&flag_default_serving=true&include_food_images=true&max_results=1&language=en&region=US")
             ?? throw new Exception("food result is null");
 
             cacheService.SetData<Dictionary<string, dynamic>?>(foodName, response, DateTimeOffset.Now.AddMinutes(2));
             logger.LogInformation("data has been saved to the cache");
+
+
+
+
+
             return response;
         }
     }
