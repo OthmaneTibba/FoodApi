@@ -1,0 +1,11 @@
+services:
+  food_api:
+    container_name: "food_api"
+    ports:
+      - 8080:8080
+    build: 
+      context: .
+      dockerfile: Dockerfile
+
+
+
